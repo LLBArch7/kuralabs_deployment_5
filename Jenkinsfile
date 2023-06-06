@@ -29,6 +29,24 @@ pipeline {
       }
     }
    
+     stage('CreateContainer') {
+       agent{label 'DockerAgent'}
+       steps {
+        
+    }
+   }
+     stage('PushtoDockerhub') {
+       agent{label 'DockerAgent'}
+       steps {
+        
+    }
+   }
+     stage('DeploytoECS') {
+       agent{label 'TerraformAgent'}
+       steps {
+        
+    }
+   }
      stage('Init') {
        steps {
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), 
