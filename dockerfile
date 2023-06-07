@@ -1,10 +1,10 @@
 FROM python:latest
 
-RUN apt update
+RUN apt update && apt -y install git
 
-WORKDIR /app
+RUN git clone https://github.com/LLBArch7/kuralabs_deployment_5.git
 
-ADD ./URL_shortner.tgz .
+WORKDIR /kuralabs_deployment_5
 
 RUN pip install -r requirements.txt
 
