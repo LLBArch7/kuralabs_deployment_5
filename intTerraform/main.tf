@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   [
   {
       "name": "url-container",
-      "image": "tsanderson77/classact:latest",
+      "image": "LLBArch7/dep5:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
