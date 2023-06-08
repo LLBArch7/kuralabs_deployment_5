@@ -38,7 +38,7 @@ pipeline {
      stage('PushtoDockerhub') {
        agent{label 'DockerAgent'}
        steps {
-        sh 'sudo docker push -t llbarch7/dep5:latest'
+        sh 'sudo docker push llbarch7/dep5:latest'
     }
    }
      stage('DeploytoECS') {
