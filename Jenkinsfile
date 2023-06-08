@@ -32,13 +32,13 @@ pipeline {
      stage('CreateContainer') {
        agent{label 'DockerAgent'}
        steps {
-        sh 'docker build -t LLBArch7/dep5:latest .'
+        sh 'sudo docker build -t LLBArch7/dep5:latest .'
     }
    }
      stage('PushtoDockerhub') {
        agent{label 'DockerAgent'}
        steps {
-        sh 'docker push -t LLBArch7/dep5:latest'
+        sh 'sudo docker push -t LLBArch7/dep5:latest'
     }
    }
      stage('DeploytoECS') {
