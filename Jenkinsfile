@@ -32,7 +32,7 @@ pipeline {
      stage('CreateContainer') {
        agent{label 'DockerAgent'}
        steps {
-        sh 'docker build -t LLBArch7/dep5:latest'
+        sh 'docker build -t LLBArch7/dep5:latest .'
     }
    }
      stage('PushtoDockerhub') {
