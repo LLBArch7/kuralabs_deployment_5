@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('DockerAgent')
+  }
    stages {
     stage ('Build') {
       steps {
@@ -38,7 +41,11 @@ pipeline {
      stage('PushtoDockerhub') {
        agent{label 'DockerAgent'}
        steps {
-        sh 'sudo docker push llbarch7/dep5:latest'
+        sh '''
+        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+        sudo docker push llbarch7/dep5:latest
+        docker logout
+        '''
     }
    }
      stage('DeploytoECS') {
