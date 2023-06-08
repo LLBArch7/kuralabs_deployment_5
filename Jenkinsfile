@@ -56,9 +56,7 @@ pipeline {
                             dir('intTerraform') {
                               sh '''#!/bin/bash
                               terraform init
-                              sleep 50
                               terraform plan -out plan.tfplan -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"
-                              sleep 50
                               terraform apply plan.tfplan
                               ''' 
                             }
