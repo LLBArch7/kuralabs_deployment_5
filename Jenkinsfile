@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('DockerAgent')
+    DOCKERHUB_CREDENTIALS = credentials('llbarch7-dockerhub')
   }
    stages {
     stage ('Build') {
@@ -33,13 +33,13 @@ pipeline {
     }
    
      stage('CreateContainer') {
-       agent{label 'DockerAgent'}
+       agent{label 'dockerAgent'}
        steps {
         sh 'sudo docker build -t llbarch7/dep5:latest .'
     }
    }
      stage('PushtoDockerhub') {
-       agent{label 'DockerAgent'}
+       agent{label 'dockerAgent'}
        steps {
         sh '''#!/bin/bash
         echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
@@ -49,7 +49,7 @@ pipeline {
     }
    }
      stage('DeploytoECS') {
-       agent{label 'TerraformAgent'}
+       agent{label 'terraformAgent'}
        steps {
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), 
                         string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
@@ -65,7 +65,7 @@ pipeline {
    }
 /*
       stage('Destroy'){
-       agent{label 'TerraformAgent'}
+       agent{label 'terraformAgent'}
        steps{
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
                         string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
