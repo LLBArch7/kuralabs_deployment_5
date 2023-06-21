@@ -63,7 +63,7 @@ pipeline {
          }
     }
    }
-
+/*
       stage('Destroy'){
        agent{label 'terraformAgent'}
        steps{
@@ -75,6 +75,6 @@ pipeline {
                           }
         }
       }
-
+*/
    }
 }
